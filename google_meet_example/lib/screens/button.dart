@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
           onPressed: () {
             GoogleAuthentication.signInWithGoogle(
                     context: context,
-                    clientId: '')
+                    clientId: '927468012811-ig3g2ct9434ktp3cs8ufih8fvijd1sg7.apps.googleusercontent.com')
                 .then((value) {
               if (value != null) {
                 Navigator.push(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_meet_example/resources/color.dart';
 import 'package:google_meet_example/utils/storage.dart';
 import 'package:google_meet_sdk/google_meet_sdk.dart';
-import 'package:googleapis/calendar/v3.dart' as calendar;
 import 'package:intl/intl.dart';
 
 class EditScreen extends StatefulWidget {
@@ -12,7 +11,7 @@ class EditScreen extends StatefulWidget {
   const EditScreen({super.key, required this.event});
 
   @override
-  _EditScreenState createState() => _EditScreenState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
@@ -42,7 +41,7 @@ class _EditScreenState extends State<EditScreen> {
   String? currentLocation;
   String? currentEmail;
   String errorString = '';
-  List<calendar.EventAttendee> attendeeEmails = [];
+  List<String> attendeeEmails = [];
 
   bool isEditingDate = false;
   bool isEditingStartTime = false;
@@ -108,7 +107,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   String? _validateTitle(String value) {
-    if (value != null) {
+    if (value.isNotEmpty) {
       value = value.trim();
       if (value.isEmpty) {
         return 'Title can\'t be empty';
@@ -121,7 +120,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   String? _validateEmail(String value) {
-    if (value != null) {
+    if (value.isNotEmpty) {
       value = value.trim();
 
       if (value.isEmpty) {
@@ -156,12 +155,9 @@ class _EditScreenState extends State<EditScreen> {
     eventId = widget.event.id;
     hasConferenceSupport = widget.event.hasConfereningSupport;
 
-    widget.event.attendeeEmails.forEach((element) {
-      calendar.EventAttendee eventAttendee = calendar.EventAttendee();
-      eventAttendee.email = element;
-
-      attendeeEmails.add(eventAttendee);
-    });
+    for (var element in widget.event.attendeeEmails) {
+      attendeeEmails.add(element);
+    }
 
     String dateString = DateFormat.yMMMMd().format(startTime);
     String startString = DateFormat.jm().format(startTime);
@@ -196,7 +192,7 @@ class _EditScreenState extends State<EditScreen> {
         title: const Text(
           'Edit Event',
           style: TextStyle(
-            color: CustomColor.dark_blue,
+            color: CustomColor.darkBlue,
             fontSize: 22,
           ),
         ),
@@ -215,7 +211,7 @@ class _EditScreenState extends State<EditScreen> {
                       await storage
                           .deleteEvent(id: eventId!)
                           .whenComplete(() => Navigator.of(context).pop())
-                          .catchError((e) => print(e));
+                          .catchError((e) => debugPrint(e));
                     });
 
                     setState(() {
@@ -280,7 +276,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Select Date',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -299,7 +295,7 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       controller: textControllerDate,
                       textCapitalization: TextCapitalization.characters,
                       onTap: () => _selectDate(context),
@@ -312,15 +308,15 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         disabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -357,7 +353,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Start Time',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -376,7 +372,7 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       controller: textControllerStartTime,
                       onTap: () => _selectStartTime(context),
                       readOnly: true,
@@ -388,15 +384,15 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         disabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -433,7 +429,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'End Time',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -452,7 +448,7 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       controller: textControllerEndTime,
                       onTap: () => _selectEndTime(context),
                       readOnly: true,
@@ -464,15 +460,15 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         disabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -509,7 +505,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Title',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -529,7 +525,7 @@ class _EditScreenState extends State<EditScreen> {
                     const SizedBox(height: 10),
                     TextField(
                       enabled: true,
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       focusNode: textFocusNodeTitle,
                       controller: textControllerTitle,
                       textCapitalization: TextCapitalization.words,
@@ -556,11 +552,11 @@ class _EditScreenState extends State<EditScreen> {
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -593,7 +589,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Description',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -614,7 +610,7 @@ class _EditScreenState extends State<EditScreen> {
                     TextField(
                       enabled: true,
                       maxLines: null,
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       focusNode: textFocusNodeDesc,
                       controller: textControllerDesc,
                       textCapitalization: TextCapitalization.sentences,
@@ -640,11 +636,11 @@ class _EditScreenState extends State<EditScreen> {
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -672,7 +668,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Location',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -692,7 +688,7 @@ class _EditScreenState extends State<EditScreen> {
                     const SizedBox(height: 10),
                     TextField(
                       enabled: true,
-                      cursorColor: CustomColor.sea_blue,
+                      cursorColor: CustomColor.seaBlue,
                       focusNode: textFocusNodeLocation,
                       controller: textControllerLocation,
                       textCapitalization: TextCapitalization.words,
@@ -718,11 +714,11 @@ class _EditScreenState extends State<EditScreen> {
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                          borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                          borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -750,7 +746,7 @@ class _EditScreenState extends State<EditScreen> {
                       text: const TextSpan(
                         text: 'Attendees',
                         style: TextStyle(
-                          color: CustomColor.dark_cyan,
+                          color: CustomColor.darkCyan,
                           fontFamily: 'Raleway',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -779,9 +775,9 @@ class _EditScreenState extends State<EditScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                attendeeEmails[index].email??"",
+                                attendeeEmails[index],
                                 style: const TextStyle(
-                                  color: CustomColor.neon_green,
+                                  color: CustomColor.neonGreen,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
                                 ),
@@ -807,7 +803,7 @@ class _EditScreenState extends State<EditScreen> {
                         Expanded(
                           child: TextField(
                             enabled: true,
-                            cursorColor: CustomColor.sea_blue,
+                            cursorColor: CustomColor.seaBlue,
                             focusNode: textFocusNodeAttendee,
                             controller: textControllerAttendee,
                             textCapitalization: TextCapitalization.none,
@@ -832,11 +828,11 @@ class _EditScreenState extends State<EditScreen> {
                               ),
                               enabledBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(color: CustomColor.sea_blue, width: 1),
+                                borderSide: BorderSide(color: CustomColor.seaBlue, width: 1),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(color: CustomColor.dark_blue, width: 2),
+                                borderSide: BorderSide(color: CustomColor.darkBlue, width: 2),
                               ),
                               errorBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -868,7 +864,7 @@ class _EditScreenState extends State<EditScreen> {
                         IconButton(
                           icon: const Icon(
                             Icons.check_circle,
-                            color: CustomColor.sea_blue,
+                            color: CustomColor.seaBlue,
                             size: 35,
                           ),
                           onPressed: () {
@@ -878,10 +874,7 @@ class _EditScreenState extends State<EditScreen> {
                             if (_validateEmail(currentEmail??"") == null) {
                               setState(() {
                                 textFocusNodeAttendee?.unfocus();
-                                calendar.EventAttendee eventAttendee = calendar.EventAttendee();
-                                eventAttendee.email = currentEmail;
-
-                                attendeeEmails.add(eventAttendee);
+                                attendeeEmails.add(currentEmail??"");
 
                                 textControllerAttendee?.text = '';
                                 currentEmail = null;
@@ -903,7 +896,7 @@ class _EditScreenState extends State<EditScreen> {
                               const Text(
                                 'Notify attendees',
                                 style: TextStyle(
-                                  color: CustomColor.dark_cyan,
+                                  color: CustomColor.darkCyan,
                                   fontFamily: 'Raleway',
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -917,7 +910,7 @@ class _EditScreenState extends State<EditScreen> {
                                     shouldNofityAttendees = value;
                                   });
                                 },
-                                activeColor: CustomColor.sea_blue,
+                                activeColor: CustomColor.seaBlue,
                               ),
                             ],
                           ),
@@ -925,13 +918,13 @@ class _EditScreenState extends State<EditScreen> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    Container(
+                    SizedBox(
                       width: double.maxFinite,
                       child: ElevatedButton(
                         // elevation: 0,
                         // focusElevation: 0,
                         // highlightElevation: 0,
-                        // color: CustomColor.sea_blue,
+                        // color: CustomColor.seaBlue,
                         onPressed: isDataStorageInProgress
                             ? null
                             : () async {
@@ -945,10 +938,7 @@ class _EditScreenState extends State<EditScreen> {
                                 textFocusNodeLocation?.unfocus();
                                 textFocusNodeAttendee?.unfocus();
 
-                                if (selectedDate != null &&
-                                    selectedStartTime != null &&
-                                    selectedEndTime != null &&
-                                    currentTitle != null) {
+                                if (currentTitle != null) {
                                   int startTimeInEpoch = DateTime(
                                     selectedDate.year,
                                     selectedDate.month,
@@ -964,12 +954,6 @@ class _EditScreenState extends State<EditScreen> {
                                     selectedEndTime.hour,
                                     selectedEndTime.minute,
                                   ).millisecondsSinceEpoch;
-
-                                  print('DIFFERENCE: ${endTimeInEpoch - startTimeInEpoch}');
-
-                                  print('Start Time: ${DateTime.fromMillisecondsSinceEpoch(startTimeInEpoch)}');
-                                  print('End Time: ${DateTime.fromMillisecondsSinceEpoch(endTimeInEpoch)}');
-
                                   if (endTimeInEpoch - startTimeInEpoch > 0) {
                                     if (_validateTitle(currentTitle??"") == null) {
                                       await calendarClient
@@ -989,8 +973,9 @@ class _EditScreenState extends State<EditScreen> {
 
                                         List<String> emails = [];
 
-                                        for (int i = 0; i < attendeeEmails.length; i++)
-                                          emails.add(attendeeEmails[i].email??"");
+                                        for (int i = 0; i < attendeeEmails.length; i++) {
+                                          emails.add(attendeeEmails[i]);
+                                        }
 
                                         EventInfo eventInfo = EventInfo(
                                           id: eventId,
@@ -1009,10 +994,12 @@ class _EditScreenState extends State<EditScreen> {
                                             .updateEventData(eventInfo)
                                             .whenComplete(() => Navigator.of(context).pop())
                                             .catchError(
-                                              (e) => print(e),
+                                              (e) => debugPrint(e),
                                             );
                                       }).catchError(
-                                        (e) => print(e),
+                                        (e) {
+                                          debugPrint(e);
+                                        },
                                       );
 
                                       setState(() {

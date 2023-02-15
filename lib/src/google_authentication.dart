@@ -67,7 +67,7 @@ class GoogleAuthentication {
       }
       await FirebaseAuth.instance.signOut();
     } catch (e) {
-      print('Error signing out. Try again.');
+      debugPrint('Error signing out. Try again.');
     }
   }
 
@@ -84,15 +84,11 @@ class GoogleAuthentication {
 
 
 class GoogleAPIClient extends IOClient {
-  Map<String, String> _headers;
+  final Map<String, String> _headers;
 
   GoogleAPIClient(this._headers) : super();
 
   @override
   Future<IOStreamedResponse> send(request) =>
       super.send(request..headers.addAll(_headers));
-
-  // @override
-  // Future<Response> head(Object url, {required Map<String, String> headers}) =>
-  //     super.head(Uri.parse(url.toString()), headers: headers..addAll(_headers));
 }

@@ -8,7 +8,7 @@ class CalendarClient {
     required String title,
     required String description,
     required String location,
-    required List<EventAttendee> attendeeEmailList,
+    required List<String> attendeeEmailList,
     required bool shouldNotifyAttendees,
     required bool hasConferenceSupport,
     required DateTime startTime,
@@ -16,12 +16,23 @@ class CalendarClient {
   }) async {
     Map<String, String>? eventData;
 
+    List<EventAttendee> attendeeList=[];
+
     String calendarId = "primary";
     Event event = Event();
 
+
+    for (var element in attendeeEmailList) {
+      EventAttendee eventAttendee = EventAttendee();
+      eventAttendee.email = element;
+      attendeeList.add(eventAttendee);
+    }
+
+
+
     event.summary = title;
     event.description = description;
-    event.attendees = attendeeEmailList;
+    event.attendees = attendeeList;
     event.location = location;
 
     if (hasConferenceSupport) {
@@ -79,7 +90,7 @@ class CalendarClient {
     required String title,
     required String description,
     required String location,
-    required List<EventAttendee> attendeeEmailList,
+    required List<String> attendeeEmailList,
     required bool shouldNotifyAttendees,
     required bool hasConferenceSupport,
     required DateTime startTime,
@@ -90,9 +101,18 @@ class CalendarClient {
     String calendarId = "primary";
     Event event = Event();
 
+    List<EventAttendee> attendeeList=[];
+
+
+    for (var element in attendeeEmailList) {
+      EventAttendee eventAttendee = EventAttendee();
+      eventAttendee.email = element;
+      attendeeList.add(eventAttendee);
+    }
+
     event.summary = title;
     event.description = description;
-    event.attendees = attendeeEmailList;
+    event.attendees = attendeeList;
     event.location = location;
 
     EventDateTime start = EventDateTime();

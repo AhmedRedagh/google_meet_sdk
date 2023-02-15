@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:google_meet_sdk/google_meet_sdk.dart';
 
 final CollectionReference mainCollection = FirebaseFirestore.instance.collection('event');
@@ -10,11 +11,11 @@ class Storage {
 
     Map<String, dynamic> data = eventInfo.toJson();
 
-    print('DATA:\n$data');
+    debugPrint('DATA:\n$data');
 
     await documentReferencer.set(data).whenComplete(() {
-      print("Event added to the database, id: {${eventInfo.id}}");
-    }).catchError((e) => print(e));
+      debugPrint("Event added to the database, id: {${eventInfo.id}}");
+    }).catchError((e) => debugPrint(e));
   }
 
   Future<void> updateEventData(EventInfo eventInfo) async {
@@ -22,19 +23,17 @@ class Storage {
 
     Map<String, dynamic> data = eventInfo.toJson();
 
-    print('DATA:\n$data');
+    debugPrint('DATA:\n$data');
 
     await documentReferencer.update(data).whenComplete(() {
-      print("Event updated in the database, id: {${eventInfo.id}}");
-    }).catchError((e) => print(e));
+      debugPrint("Event updated in the database, id: {${eventInfo.id}}");
+    }).catchError((e) => debugPrint(e));
   }
 
   Future<void> deleteEvent({required String id}) async {
     DocumentReference documentReferencer = documentReference.collection('events').doc(id);
-
-    await documentReferencer.delete().catchError((e) => print(e));
-
-    print('Event deleted, id: $id');
+    await documentReferencer.delete().catchError((e) => debugPrint(e));
+    debugPrint('Event deleted, id: $id');
   }
 
   Stream<QuerySnapshot> retrieveEvents() {

@@ -30,18 +30,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: const Text(
           'Event Details',
           style: TextStyle(
-            color: CustomColor.dark_blue,
+            color: CustomColor.darkBlue,
             fontSize: 22,
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: CustomColor.dark_cyan,
+        backgroundColor: CustomColor.darkCyan,
         child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => CreateScreen(),
+              builder: (context) => const CreateScreen(),
             ),
           );
         },
@@ -58,7 +58,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             stream: storage.retrieveEvents(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print('snapshot.data is ${snapshot.data?.docs.length}');
                 if (snapshot.data!.docs.isNotEmpty) {
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
@@ -98,7 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   right: 16.0,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: CustomColor.neon_green.withOpacity(0.3),
+                                  color: CustomColor.neonGreen.withOpacity(0.3),
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 child: Column(
@@ -107,7 +106,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     Text(
                                       event.name,
                                       style: const TextStyle(
-                                        color: CustomColor.dark_blue,
+                                        color: CustomColor.darkBlue,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 22,
                                         letterSpacing: 1,
@@ -131,7 +130,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       child: Text(
                                         event.link,
                                         style: TextStyle(
-                                          color: CustomColor.dark_blue.withOpacity(0.5),
+                                          color: CustomColor.darkBlue.withOpacity(0.5),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                           letterSpacing: 0.5,
@@ -145,7 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         Container(
                                           height: 50,
                                           width: 5,
-                                          color: CustomColor.neon_green,
+                                          color: CustomColor.neonGreen,
                                         ),
                                         const SizedBox(width: 10),
                                         Column(
@@ -154,7 +153,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               dateString,
                                               style: const TextStyle(
-                                                color: CustomColor.dark_cyan,
+                                                color: CustomColor.darkCyan,
                                                 fontFamily: 'OpenSans',
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16,
@@ -164,7 +163,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               '$startTimeString - $endTimeString',
                                               style: const TextStyle(
-                                                color: CustomColor.dark_cyan,
+                                                color: CustomColor.darkCyan,
                                                 fontFamily: 'OpenSans',
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16,
@@ -202,7 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return const Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(CustomColor.sea_blue),
+                  valueColor: AlwaysStoppedAnimation<Color>(CustomColor.seaBlue),
                 ),
               );
             },
