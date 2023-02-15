@@ -1,15 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_meta_data/flutter_meta_data.dart';
 import 'package:google_meet_sdk/src/utils/calendar_client.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart' as cal;
 import 'package:http/io_client.dart';
 
 class GoogleAuthentication {
-  static Future<User?> signInWithGoogle({required BuildContext context,required String clientId, String? serverClientId,}) async {
+  static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
+
+    var clientId = await FlutterMetaData.getMetaDataValue('clientId') ?? '';
+
+    var serverClientId =
+        await FlutterMetaData.getMetaDataValue('serverClientId');
+
+    if (clientId.isEmpty) {
+      customSnackBar(content: 'Enter clientId in manifest');
+      return null;
+    }
+
     final GoogleSignIn googleSignIn = GoogleSignIn(
       clientId: clientId,
       serverClientId: serverClientId,
@@ -19,44 +31,44 @@ class GoogleAuthentication {
       ],
     );
 
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-
-
-
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleAPIClient httpClient =
-      GoogleAPIClient(await googleSignInAccount.authHeaders);
+          GoogleAPIClient(await googleSignInAccount.authHeaders);
       CalendarClient.calendar = cal.CalendarApi(httpClient);
 
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+          await googleSignInAccount.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
 
-
       try {
         final UserCredential userCredential =
-        await auth.signInWithCredential(credential);
+            await auth.signInWithCredential(credential);
         user = userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
-          customSnackBar(content: 'The account already exists with a different credential');
+          customSnackBar(
+              content:
+                  'The account already exists with a different credential');
         } else if (e.code == 'invalid-credential') {
-          customSnackBar(content: 'Error occurred while accessing credentials. Try again.');
+          customSnackBar(
+              content:
+                  'Error occurred while accessing credentials. Try again.');
         }
       } catch (e) {
-        customSnackBar(content: 'Error occurred using Google Sign In. Try again.');
+        customSnackBar(
+            content: 'Error occurred using Google Sign In. Try again.');
       }
-
     }
 
     return user;
   }
-
 
   static Future<void> signOut({required BuildContext context}) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -81,7 +93,6 @@ class GoogleAuthentication {
     );
   }
 }
-
 
 class GoogleAPIClient extends IOClient {
   final Map<String, String> _headers;
