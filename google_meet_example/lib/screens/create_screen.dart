@@ -990,9 +990,6 @@ class _CreateScreenState extends State<CreateScreen> {
                                   isDataStorageInProgress = false;
                                 });
                               },
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(10),
-                        // ),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: isDataStorageInProgress
