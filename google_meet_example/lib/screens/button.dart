@@ -14,16 +14,17 @@ class Button extends StatelessWidget {
           onPressed: () {
             GoogleAuthentication.signInWithGoogle(
                     context: context,
-                    clientId:
-                        '513910323072-8k64rs335idb0r7takt6hrvsbr650n3k.apps.googleusercontent.com',
-              serverClientId: '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'
-            )
+                    clientId: '')
                 .then((value) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DashboardScreen(),
-                  ));
+              if (value != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DashboardScreen(),
+                    ));
+              } else {
+                debugPrint('something went wrong while login...');
+              }
             });
           },
           child: const Text("click"),

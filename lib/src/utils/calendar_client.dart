@@ -30,9 +30,6 @@ class CalendarClient {
       conferenceRequest.requestId = "${startTime.millisecondsSinceEpoch}-${endTime.millisecondsSinceEpoch}";
       // conferenceData.conferenceId
       conferenceData.createRequest = conferenceRequest;
-
-      debugPrint('conferenceId  ${conferenceData.conferenceId}');
-
       event.conferenceData = conferenceData;
     }
 
@@ -52,8 +49,7 @@ class CalendarClient {
               conferenceDataVersion: hasConferenceSupport ? 1 : 0, sendUpdates: shouldNotifyAttendees ? "all" : "none")
           .then((value) {
         debugPrint("Event Status: ${value.status}");
-        debugPrint("Event Status: ${value.conferenceData}");
-        debugPrint("Event Status: ${value.conferenceData?.conferenceId}");
+        debugPrint("conferenceId: ${value.conferenceData?.conferenceId}");
         if (value.status == "confirmed") {
           String? joiningLink;
           String? eventId;

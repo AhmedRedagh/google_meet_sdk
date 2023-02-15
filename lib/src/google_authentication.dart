@@ -7,11 +7,9 @@ import 'package:googleapis/calendar/v3.dart' as cal;
 import 'package:http/io_client.dart';
 
 class GoogleAuthentication {
-  static Future<User?> signInWithGoogle({required BuildContext context,required String clientId,required String serverClientId,}) async {
+  static Future<User?> signInWithGoogle({required BuildContext context,required String clientId, String? serverClientId,}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
-
-
     final GoogleSignIn googleSignIn = GoogleSignIn(
       clientId: clientId,
       serverClientId: serverClientId,
@@ -43,8 +41,6 @@ class GoogleAuthentication {
       try {
         final UserCredential userCredential =
         await auth.signInWithCredential(credential);
-
-
         user = userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
