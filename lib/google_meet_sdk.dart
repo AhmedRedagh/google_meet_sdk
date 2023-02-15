@@ -1,7 +1,6 @@
 library google_meet_sdk;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export '../src/models/event_info.dart';
+export '../src/utils/calendar_client.dart';
+export '../src/google_authentication.dart';
+export '../src/secrets.dart';

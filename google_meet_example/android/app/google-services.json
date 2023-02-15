@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513910323072",
+    "project_id": "meetdemo-811db",
+    "storage_bucket": "meetdemo-811db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513910323072:android:f81f6c9241776f09c8b365",
+        "android_client_info": {
+          "package_name": "com.example.google_meet_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513910323072-q7nfpe8dshg2ehvj6t3fhf6buk6ir6h6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIUTJN3lcQJItr4GRBuHt9fIKw5Jph_QY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513910323072-q7nfpe8dshg2ehvj6t3fhf6buk6ir6h6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
