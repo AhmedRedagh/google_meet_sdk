@@ -34,7 +34,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-       <meta-data android:name="clientId" android:value="927468012811-ig3g2ct9434ktp3cs8ufih8fvijd1sg7.apps.googleusercontent.com" />
+       <meta-data android:name="clientId" android:value="" />
 
 <!--       <meta-data android:name="serverClientId" android:value="" />-->
 
