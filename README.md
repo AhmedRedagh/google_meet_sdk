@@ -115,13 +115,12 @@ ElevatedButton(
 ```
 
 ### for example refer to [example/lib/main.dart](https://github.com/shivbo96/google_meet_sdk)
-## screenshots
 
-<img src="https://raw.githubusercontent.com/shivbo96/platform_metadata/main/images/ios.png" width="250" height="480">
-<img src="https://raw.githubusercontent.com/shivbo96/platform_metadata/main/images/android.png" width="250" height="480">
+## video
+<img src="https://raw.githubusercontent.com/shivbo96/google_meet_sdk/main/video/google_meet_sdk.mp4" width="250" height="480">
 
 
 ## More information
 
-[Pub package](https://pub.dartlang.org/packages/otp_pin_field)
+[Pub package](https://pub.dartlang.org/packages/google_meet_sdk)
 [Flutter documentation](https://flutter.io/).
