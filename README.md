@@ -122,9 +122,5 @@ https://user-images.githubusercontent.com/37922543/219462854-b5249e9e-2896-425b-
 
 ## More information
 
-
-
-
-
 [Pub package](https://pub.dartlang.org/packages/google_meet_sdk)
 [Flutter documentation](https://flutter.io/).
