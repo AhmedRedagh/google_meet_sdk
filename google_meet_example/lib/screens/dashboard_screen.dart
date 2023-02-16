@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_meet_example/resources/color.dart';
 import 'package:google_meet_example/screens/create_screen.dart';
@@ -63,14 +62,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
-                      Map<String, dynamic> eventInfo = snapshot.data!.docs[index].data() as Map<String, dynamic> ;
+                      Map<String, dynamic> eventInfo =
+                          snapshot.data!.docs[index].data()
+                              as Map<String, dynamic>;
 
                       EventInfo event = EventInfo.fromMap(eventInfo);
 
-                      DateTime startTime = DateTime.fromMillisecondsSinceEpoch(event.startTimeInEpoch);
-                      DateTime endTime = DateTime.fromMillisecondsSinceEpoch(event.endTimeInEpoch);
+                      DateTime startTime = DateTime.fromMillisecondsSinceEpoch(
+                          event.startTimeInEpoch);
+                      DateTime endTime = DateTime.fromMillisecondsSinceEpoch(
+                          event.endTimeInEpoch);
 
-                      String startTimeString = DateFormat.jm().format(startTime);
+                      String startTimeString =
+                          DateFormat.jm().format(startTime);
                       String endTimeString = DateFormat.jm().format(endTime);
                       String dateString = DateFormat.yMMMMd().format(startTime);
 
@@ -126,11 +130,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                     const SizedBox(height: 10),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 8.0, bottom: 8.0),
                                       child: Text(
                                         event.link,
                                         style: TextStyle(
-                                          color: CustomColor.darkBlue.withOpacity(0.5),
+                                          color: CustomColor.darkBlue
+                                              .withOpacity(0.5),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                           letterSpacing: 0.5,
@@ -139,7 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                     const SizedBox(height: 10),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 50,
@@ -148,7 +155,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         ),
                                         const SizedBox(width: 10),
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               dateString,
@@ -183,8 +191,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       );
                     },
                   );
-                }
-                else {
+                } else {
                   return const Center(
                     child: Text(
                       'No Events',
@@ -201,7 +208,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return const Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(CustomColor.seaBlue),
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(CustomColor.seaBlue),
                 ),
               );
             },

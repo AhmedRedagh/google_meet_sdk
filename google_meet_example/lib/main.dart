@@ -9,7 +9,6 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -20,10 +19,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+        appBarTheme:
+            const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
       ),
       home: const Button(),
     );
-
   }
 }
