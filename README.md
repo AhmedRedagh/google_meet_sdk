@@ -37,20 +37,18 @@ import 'package:google_meet_sdk/google_meet_sdk.dart';
 
 ```add your clientId in android manifest and in iOS info.plist```
 
-```
-In Android
 
+```In Android```
+```xml
 <meta-data android:name="clientId" android:value="12234" />
 ```
-
-```
-In iOS
-
+```In iOS```
+```xml
 <key>clientId</key>
 <string> 12234 </string>
 ```
 
-##Note:
+## Note:
 ```
 1. enable google authentication from firebase
 2. enable Google Calendar API from gcp console and select thesr scopes ( CalendarApi.calendarScope ,CalendarApi.calendarEventsScope  )
@@ -59,7 +57,7 @@ In iOS
 ```
 
 ```first login via google```
-```
+```dart
 ElevatedButton(
           key: UniqueKey(),
           onPressed: () {
@@ -82,7 +80,7 @@ ElevatedButton(
 ```
 
 ```to insert/ add google meet and added event in your calender```
-```
+```dart
            var result = await CalendarClient() .insert(title: currentTitle??"",
              description: currentDesc ?? '',
              location: currentLocation??"",
@@ -96,7 +94,7 @@ ElevatedButton(
 ```
 
 ```to modify/update google meet and added event in your calender```
-```
+```dart
            var result = await CalendarClient().modify(title: currentTitle??"",
              description: currentDesc ?? '',
              location: currentLocation??"",
@@ -111,7 +109,7 @@ ElevatedButton(
 
 
 ```to delete/remove google meet and added event in your calender```
-```
+```dart
            var result =  await CalendarClient().delete(eventId!, true)
 
 ```
