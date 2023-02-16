@@ -16,19 +16,16 @@ class CalendarClient {
   }) async {
     Map<String, String>? eventData;
 
-    List<EventAttendee> attendeeList=[];
+    List<EventAttendee> attendeeList = [];
 
     String calendarId = "primary";
     Event event = Event();
-
 
     for (var element in attendeeEmailList) {
       EventAttendee eventAttendee = EventAttendee();
       eventAttendee.email = element;
       attendeeList.add(eventAttendee);
     }
-
-
 
     event.summary = title;
     event.description = description;
@@ -38,7 +35,8 @@ class CalendarClient {
     if (hasConferenceSupport) {
       ConferenceData conferenceData = ConferenceData();
       CreateConferenceRequest conferenceRequest = CreateConferenceRequest();
-      conferenceRequest.requestId = "${startTime.millisecondsSinceEpoch}-${endTime.millisecondsSinceEpoch}";
+      conferenceRequest.requestId =
+          "${startTime.millisecondsSinceEpoch}-${endTime.millisecondsSinceEpoch}";
       // conferenceData.conferenceId
       conferenceData.createRequest = conferenceRequest;
       event.conferenceData = conferenceData;
@@ -57,7 +55,8 @@ class CalendarClient {
     try {
       await calendar?.events
           .insert(event, calendarId,
-              conferenceDataVersion: hasConferenceSupport ? 1 : 0, sendUpdates: shouldNotifyAttendees ? "all" : "none")
+              conferenceDataVersion: hasConferenceSupport ? 1 : 0,
+              sendUpdates: shouldNotifyAttendees ? "all" : "none")
           .then((value) {
         debugPrint("Event Status: ${value.status}");
         debugPrint("conferenceId: ${value.conferenceData?.conferenceId}");
@@ -68,10 +67,11 @@ class CalendarClient {
           eventId = value.id;
 
           if (hasConferenceSupport) {
-            joiningLink = "https://meet.google.com/${value.conferenceData?.conferenceId}";
+            joiningLink =
+                "https://meet.google.com/${value.conferenceData?.conferenceId}";
           }
 
-          eventData = {'id': eventId??"", 'link': '$joiningLink'};
+          eventData = {'id': eventId ?? "", 'link': '$joiningLink'};
 
           debugPrint('Event added to Google Calendar $joiningLink');
         } else {
@@ -101,8 +101,7 @@ class CalendarClient {
     String calendarId = "primary";
     Event event = Event();
 
-    List<EventAttendee> attendeeList=[];
-
+    List<EventAttendee> attendeeList = [];
 
     for (var element in attendeeEmailList) {
       EventAttendee eventAttendee = EventAttendee();
@@ -128,17 +127,19 @@ class CalendarClient {
     try {
       await calendar?.events
           .patch(event, calendarId, id,
-              conferenceDataVersion: hasConferenceSupport ? 1 : 0, sendUpdates: shouldNotifyAttendees ? "all" : "none")
+              conferenceDataVersion: hasConferenceSupport ? 1 : 0,
+              sendUpdates: shouldNotifyAttendees ? "all" : "none")
           .then((value) {
         debugPrint("Event Status: ${value.status}");
         if (value.status == "confirmed") {
           String? joiningLink;
           String eventId;
 
-          eventId = value.id??'';
+          eventId = value.id ?? '';
 
           if (hasConferenceSupport) {
-            joiningLink = "https://meet.google.com/${value.conferenceData?.conferenceId}";
+            joiningLink =
+                "https://meet.google.com/${value.conferenceData?.conferenceId}";
           }
 
           eventData = {'id': eventId, 'link': '$joiningLink'};
@@ -159,7 +160,10 @@ class CalendarClient {
     String calendarId = "primary";
 
     try {
-      await calendar?.events.delete(calendarId, eventId, sendUpdates: shouldNotify ? "all" : "none").then((value) {
+      await calendar?.events
+          .delete(calendarId, eventId,
+              sendUpdates: shouldNotify ? "all" : "none")
+          .then((value) {
         debugPrint('Event deleted from Google Calendar');
       });
     } catch (e) {
