@@ -1,21 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meta_data/flutter_meta_data.dart';
 import 'package:google_meet_sdk/src/utils/calendar_client.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart' as cal;
 import 'package:http/io_client.dart';
+import 'package:platform_metadata/platform_metadata.dart';
 
 class GoogleAuthentication {
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
-    var clientId = await FlutterMetaData.getMetaDataValue('clientId') ?? '';
+    var clientId = await PlatformMetadata.getMetaDataValue('clientId') ?? '';
 
     var serverClientId =
-        await FlutterMetaData.getMetaDataValue('serverClientId');
+        await PlatformMetadata.getMetaDataValue('serverClientId');
 
     if (clientId.isEmpty) {
       customSnackBar(content: 'Enter clientId in manifest');
