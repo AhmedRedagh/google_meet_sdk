@@ -117,10 +117,14 @@ ElevatedButton(
 ### for example refer to [example/lib/main.dart](https://github.com/shivbo96/google_meet_sdk)
 
 ## video
-<img src="https://raw.githubusercontent.com/shivbo96/google_meet_sdk/main/video/google_meet_sdk.mp4" width="250" height="480">
+https://user-images.githubusercontent.com/37922543/219462854-b5249e9e-2896-425b-82c8-d0e8953c8d82.mp4
 
 
 ## More information
+
+
+
+
 
 [Pub package](https://pub.dartlang.org/packages/google_meet_sdk)
 [Flutter documentation](https://flutter.io/).
