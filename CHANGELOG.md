@@ -1,3 +1,2 @@
 ## 0.0.1
-
-* TODO: Describe initial release.
+* Initial release, working base functionality to add google meet and support create, modify and delete calender events and notify the attendee
