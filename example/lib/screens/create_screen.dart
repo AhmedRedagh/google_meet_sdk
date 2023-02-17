@@ -984,15 +984,18 @@ class _CreateScreenState extends State<CreateScreen> {
                                           emails.add(attendeeEmails[i]);
                                         }
 
-                                        GoogleMeetEventInfo eventInfo = GoogleMeetEventInfo(
+                                        GoogleMeetEventInfo eventInfo =
+                                            GoogleMeetEventInfo(
                                           id: eventId,
                                           name: currentTitle ?? "",
                                           description: currentDesc ?? '',
                                           location: currentLocation ?? "",
                                           link: eventLink,
                                           attendeeEmails: emails,
-                                          shouldNotifyAttendees: shouldNofityAttendees,
-                                          hasConferencingSupport: hasConferenceSupport,
+                                          shouldNotifyAttendees:
+                                              shouldNofityAttendees,
+                                          hasConferencingSupport:
+                                              hasConferenceSupport,
                                           startTimeInEpoch: startTimeInEpoch,
                                           endTimeInEpoch: endTimeInEpoch,
                                         );

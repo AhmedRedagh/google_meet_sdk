@@ -4,7 +4,6 @@ import 'package:googleapis/calendar/v3.dart';
 class CalendarClient {
   static CalendarApi? calendar;
 
-
   ///to insert/ add google meet and added event in your calender
   Future<Map<String, String>?> insert({
     required String title,
@@ -158,7 +157,6 @@ class CalendarClient {
 
     return eventData;
   }
-
 
   ///to delete/remove google meet and added event in your calender
   Future<void> delete(String eventId, bool shouldNotify) async {

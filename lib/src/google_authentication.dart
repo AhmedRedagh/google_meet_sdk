@@ -8,8 +8,6 @@ import 'package:http/io_client.dart';
 import 'package:platform_metadata/platform_metadata.dart';
 
 class GoogleAuthentication {
-
-
   ///to login via google
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -98,7 +96,6 @@ class GoogleAuthentication {
     );
   }
 }
-
 
 class GoogleAPIClient extends IOClient {
   final Map<String, String> _headers;
