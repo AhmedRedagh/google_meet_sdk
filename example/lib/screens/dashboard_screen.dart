@@ -66,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           snapshot.data!.docs[index].data()
                               as Map<String, dynamic>;
 
-                      EventInfo event = EventInfo.fromMap(eventInfo);
+                      GoogleMeetEventInfo event = GoogleMeetEventInfo.fromMap(eventInfo);
 
                       DateTime startTime = DateTime.fromMillisecondsSinceEpoch(
                           event.startTimeInEpoch);

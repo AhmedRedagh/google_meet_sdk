@@ -5,7 +5,7 @@ import 'package:google_meet_sdk/google_meet_sdk.dart';
 import 'package:intl/intl.dart';
 
 class EditScreen extends StatefulWidget {
-  final EventInfo event;
+  final GoogleMeetEventInfo event;
 
   const EditScreen({super.key, required this.event});
 
@@ -154,7 +154,7 @@ class _EditScreenState extends State<EditScreen> {
     currentDesc = widget.event.description;
     currentLocation = widget.event.location;
     eventId = widget.event.id;
-    hasConferenceSupport = widget.event.hasConfereningSupport;
+    hasConferenceSupport = widget.event.hasConferencingSupport;
 
     for (var element in widget.event.attendeeEmails) {
       attendeeEmails.add(element);
@@ -1029,17 +1029,15 @@ class _EditScreenState extends State<EditScreen> {
                                           emails.add(attendeeEmails[i]);
                                         }
 
-                                        EventInfo eventInfo = EventInfo(
+                                        GoogleMeetEventInfo eventInfo = GoogleMeetEventInfo(
                                           id: eventId,
                                           name: currentTitle ?? "",
                                           description: currentDesc ?? '',
                                           location: currentLocation ?? "",
                                           link: eventLink,
                                           attendeeEmails: emails,
-                                          shouldNotifyAttendees:
-                                              shouldNofityAttendees,
-                                          hasConfereningSupport:
-                                              hasConferenceSupport,
+                                          shouldNotifyAttendees: shouldNofityAttendees,
+                                          hasConferencingSupport: hasConferenceSupport,
                                           startTimeInEpoch: startTimeInEpoch,
                                           endTimeInEpoch: endTimeInEpoch,
                                         );

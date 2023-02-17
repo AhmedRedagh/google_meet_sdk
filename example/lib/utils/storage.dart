@@ -7,7 +7,7 @@ final CollectionReference mainCollection =
 final DocumentReference documentReference = mainCollection.doc('test');
 
 class Storage {
-  Future<void> storeEventData(EventInfo eventInfo) async {
+  Future<void> storeEventData(GoogleMeetEventInfo eventInfo) async {
     DocumentReference documentReferencer =
         documentReference.collection('events').doc(eventInfo.id);
 
@@ -20,7 +20,7 @@ class Storage {
     }).catchError((e) => debugPrint(e));
   }
 
-  Future<void> updateEventData(EventInfo eventInfo) async {
+  Future<void> updateEventData(GoogleMeetEventInfo eventInfo) async {
     DocumentReference documentReferencer =
         documentReference.collection('events').doc(eventInfo.id);
 

@@ -1,6 +1,6 @@
 name: google_meet_sdk
 description: A flutter package which will help you to add google meet in your projects and also help you to create, modify and delete calender events and notify the attendee
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/shivbo96/google_meet_sdk
 
 environment:

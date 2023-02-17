@@ -1,4 +1,4 @@
-class EventInfo {
+class GoogleMeetEventInfo {
   final String id;
   final String name;
   final String description;
@@ -6,11 +6,11 @@ class EventInfo {
   final String link;
   final List<dynamic> attendeeEmails;
   final bool shouldNotifyAttendees;
-  final bool hasConfereningSupport;
+  final bool hasConferencingSupport;
   final int startTimeInEpoch;
   final int endTimeInEpoch;
 
-  EventInfo({
+  GoogleMeetEventInfo({
     required this.id,
     required this.name,
     required this.description,
@@ -18,12 +18,12 @@ class EventInfo {
     required this.link,
     required this.attendeeEmails,
     required this.shouldNotifyAttendees,
-    required this.hasConfereningSupport,
+    required this.hasConferencingSupport,
     required this.startTimeInEpoch,
     required this.endTimeInEpoch,
   });
 
-  EventInfo.fromMap(Map snapshot)
+  GoogleMeetEventInfo.fromMap(Map snapshot)
       : id = snapshot['id'] ?? '',
         name = snapshot['name'] ?? '',
         description = snapshot['desc'],
@@ -31,7 +31,7 @@ class EventInfo {
         link = snapshot['link'],
         attendeeEmails = snapshot['emails'] ?? '',
         shouldNotifyAttendees = snapshot['should_notify'],
-        hasConfereningSupport = snapshot['has_conferencing'],
+        hasConferencingSupport = snapshot['has_conferencing'],
         startTimeInEpoch = snapshot['start'],
         endTimeInEpoch = snapshot['end'];
 
@@ -44,7 +44,7 @@ class EventInfo {
       'link': link,
       'emails': attendeeEmails,
       'should_notify': shouldNotifyAttendees,
-      'has_conferencing': hasConfereningSupport,
+      'has_conferencing': hasConferencingSupport,
       'start': startTimeInEpoch,
       'end': endTimeInEpoch,
     };

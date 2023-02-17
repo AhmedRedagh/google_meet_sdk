@@ -8,6 +8,9 @@ import 'package:http/io_client.dart';
 import 'package:platform_metadata/platform_metadata.dart';
 
 class GoogleAuthentication {
+
+
+  ///to login via google
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
@@ -70,6 +73,7 @@ class GoogleAuthentication {
     return user;
   }
 
+  ///to logout from  google
   static Future<void> signOut({required BuildContext context}) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -83,6 +87,7 @@ class GoogleAuthentication {
     }
   }
 
+  ///to show snackBar
   static SnackBar customSnackBar({required String content}) {
     return SnackBar(
       backgroundColor: Colors.black,
@@ -93,6 +98,7 @@ class GoogleAuthentication {
     );
   }
 }
+
 
 class GoogleAPIClient extends IOClient {
   final Map<String, String> _headers;
