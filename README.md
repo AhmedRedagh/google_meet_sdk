@@ -7,6 +7,8 @@ A flutter package which will help you to add add google meet in your projects an
 
 Created by Shivam Mishra [@shivbo96](https://github.com/shivbo96)
 
+<a href="https://www.buymeacoffee.com/smishra" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 # Usage
 
 ## Use this package as a library
