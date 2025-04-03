@@ -5,9 +5,12 @@
 A flutter package which will help you to add add google meet in your projects and also help you to create, modify and delete calender events and notify the attendee
 
 
-Created by Shivam Mishra [@shivbo96](https://github.com/shivbo96)
+[//]: # (Created by Shivam Mishra [@shivbo96]&#40;https://github.com/shivbo96&#41;)
 
-<a href="https://www.buymeacoffee.com/smishra" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+Created by [Techahead Software](https://www.techaheadcorp.com/)
+
+[//]: # ()
+[//]: # (<a href="https://www.buymeacoffee.com/smishra" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>)
 
 # Usage
 

@@ -3,3 +3,6 @@
 
 ## 0.0.2
 * added example with some Hot fix
+
+## 0.0.3
+* updated read me file
